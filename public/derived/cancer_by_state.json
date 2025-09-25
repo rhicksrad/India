@@ -1,0 +1,290 @@
+[
+  {
+    "state": "Andaman and Nicobar Islands",
+    "incidence_2019": 357,
+    "incidence_2020": 366,
+    "incidence_2021": 380,
+    "incidence_2022": 393,
+    "incidence_cagr_19_22": 0.03254291590444591
+  },
+  {
+    "state": "Andhra Pradesh",
+    "incidence_2019": 68883,
+    "incidence_2020": 70424,
+    "incidence_2021": 71970,
+    "incidence_2022": 73536,
+    "incidence_cagr_19_22": 0.022027660362719192
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "incidence_2019": 1015,
+    "incidence_2020": 1035,
+    "incidence_2021": 1064,
+    "incidence_2022": 1087,
+    "incidence_cagr_19_22": 0.02310726196810453
+  },
+  {
+    "state": "Assam",
+    "incidence_2019": 36948,
+    "incidence_2020": 37880,
+    "incidence_2021": 38834,
+    "incidence_2022": 39787,
+    "incidence_cagr_19_22": 0.024983213803628335
+  },
+  {
+    "state": "Bihar",
+    "incidence_2019": 101014,
+    "incidence_2020": 103711,
+    "incidence_2021": 106435,
+    "incidence_2022": 109274,
+    "incidence_cagr_19_22": 0.026546021064662417
+  },
+  {
+    "state": "Chandigarh",
+    "incidence_2019": 994,
+    "incidence_2020": 1024,
+    "incidence_2021": 1053,
+    "incidence_2022": 1088,
+    "incidence_cagr_19_22": 0.030577928227708773
+  },
+  {
+    "state": "Chhattisgarh",
+    "incidence_2019": 27113,
+    "incidence_2020": 27828,
+    "incidence_2021": 28529,
+    "incidence_2022": 29253,
+    "incidence_cagr_19_22": 0.025646287503098275
+  },
+  {
+    "state": "Dadra and Nagar Haveli and Daman and Diu",
+    "incidence_2019": 304,
+    "incidence_2020": 330,
+    "incidence_2021": 354,
+    "incidence_2022": 388,
+    "incidence_cagr_19_22": 0.08472432829500742
+  },
+  {
+    "state": "Delhi",
+    "incidence_2019": 24436,
+    "incidence_2020": 25178,
+    "incidence_2021": 25969,
+    "incidence_2022": 26735,
+    "incidence_cagr_19_22": 0.030425720653812105
+  },
+  {
+    "state": "Goa",
+    "incidence_2019": 1591,
+    "incidence_2020": 1618,
+    "incidence_2021": 1652,
+    "incidence_2022": 1700,
+    "incidence_cagr_19_22": 0.0223342576302612
+  },
+  {
+    "state": "Gujarat",
+    "incidence_2019": 67841,
+    "incidence_2020": 69660,
+    "incidence_2021": 71507,
+    "incidence_2022": 73382,
+    "incidence_cagr_19_22": 0.02651610576320884
+  },
+  {
+    "state": "Haryana",
+    "incidence_2019": 28453,
+    "incidence_2020": 29219,
+    "incidence_2021": 30015,
+    "incidence_2022": 30851,
+    "incidence_cagr_19_22": 0.027338886728712763
+  },
+  {
+    "state": "Himachal Pradesh",
+    "incidence_2019": 8589,
+    "incidence_2020": 8799,
+    "incidence_2021": 8978,
+    "incidence_2022": 9164,
+    "incidence_cagr_19_22": 0.02183512193482362
+  },
+  {
+    "state": "Jammu and Kashmir",
+    "incidence_2019": 12396,
+    "incidence_2020": 12726,
+    "incidence_2021": 13060,
+    "incidence_2022": 13395,
+    "incidence_cagr_19_22": 0.026172527110294164
+  },
+  {
+    "state": "Jharkhand",
+    "incidence_2019": 33045,
+    "incidence_2020": 33961,
+    "incidence_2021": 34910,
+    "incidence_2022": 35860,
+    "incidence_cagr_19_22": 0.02762543015846486
+  },
+  {
+    "state": "Karnataka",
+    "incidence_2019": 83824,
+    "incidence_2020": 85968,
+    "incidence_2021": 88126,
+    "incidence_2022": 90349,
+    "incidence_cagr_19_22": 0.025301650105741924
+  },
+  {
+    "state": "Kerala",
+    "incidence_2019": 56148,
+    "incidence_2020": 57155,
+    "incidence_2021": 58139,
+    "incidence_2022": 59143,
+    "incidence_cagr_19_22": 0.017473295571180048
+  },
+  {
+    "state": "Ladakh",
+    "incidence_2019": 279,
+    "incidence_2020": 286,
+    "incidence_2021": 294,
+    "incidence_2022": 302,
+    "incidence_cagr_19_22": 0.02675678136044146
+  },
+  {
+    "state": "Lakshadweep",
+    "incidence_2019": 27,
+    "incidence_2020": 27,
+    "incidence_2021": 28,
+    "incidence_2022": 28,
+    "incidence_cagr_19_22": 0.012196323958554078
+  },
+  {
+    "state": "Madhya Pradesh",
+    "incidence_2019": 75911,
+    "incidence_2020": 77888,
+    "incidence_2021": 79871,
+    "incidence_2022": 81901,
+    "incidence_cagr_19_22": 0.025639718088692254
+  },
+  {
+    "state": "Maharashtra",
+    "incidence_2019": 113374,
+    "incidence_2020": 116121,
+    "incidence_2021": 118906,
+    "incidence_2022": 121717,
+    "incidence_cagr_19_22": 0.023951193921118774
+  },
+  {
+    "state": "Manipur",
+    "incidence_2019": 1844,
+    "incidence_2020": 1899,
+    "incidence_2021": 2022,
+    "incidence_2022": 2097,
+    "incidence_cagr_19_22": 0.04378849255250028
+  },
+  {
+    "state": "Meghalaya",
+    "incidence_2019": 2808,
+    "incidence_2020": 2879,
+    "incidence_2021": 2943,
+    "incidence_2022": 3025,
+    "incidence_cagr_19_22": 0.02512326965740974
+  },
+  {
+    "state": "Mizoram",
+    "incidence_2019": 1783,
+    "incidence_2020": 1837,
+    "incidence_2021": 1919,
+    "incidence_2022": 1985,
+    "incidence_cagr_19_22": 0.03642144200454234
+  },
+  {
+    "state": "Nagaland",
+    "incidence_2019": 1719,
+    "incidence_2020": 1768,
+    "incidence_2021": 1805,
+    "incidence_2022": 1854,
+    "incidence_cagr_19_22": 0.02552114095238811
+  },
+  {
+    "state": "Odisha",
+    "incidence_2019": 49604,
+    "incidence_2020": 50692,
+    "incidence_2021": 51829,
+    "incidence_2022": 52960,
+    "incidence_cagr_19_22": 0.02206164911860875
+  },
+  {
+    "state": "Puducherry",
+    "incidence_2019": 1523,
+    "incidence_2020": 1577,
+    "incidence_2021": 1623,
+    "incidence_2022": 1679,
+    "incidence_cagr_19_22": 0.03303950741689432
+  },
+  {
+    "state": "Punjab",
+    "incidence_2019": 37744,
+    "incidence_2020": 38636,
+    "incidence_2021": 39521,
+    "incidence_2022": 40435,
+    "incidence_cagr_19_22": 0.023221934244361142
+  },
+  {
+    "state": "Rajasthan",
+    "incidence_2019": 69156,
+    "incidence_2020": 70987,
+    "incidence_2021": 72825,
+    "incidence_2022": 74725,
+    "incidence_cagr_19_22": 0.02615276419478363
+  },
+  {
+    "state": "Sikkim",
+    "incidence_2019": 443,
+    "incidence_2020": 445,
+    "incidence_2021": 465,
+    "incidence_2022": 496,
+    "incidence_cagr_19_22": 0.038387177838682174
+  },
+  {
+    "state": "Tamil Nadu",
+    "incidence_2019": 86596,
+    "incidence_2020": 88866,
+    "incidence_2021": 91184,
+    "incidence_2022": 93536,
+    "incidence_cagr_19_22": 0.02603061751363711
+  },
+  {
+    "state": "Telangana",
+    "incidence_2019": 46464,
+    "incidence_2020": 47620,
+    "incidence_2021": 48775,
+    "incidence_2022": 49983,
+    "incidence_cagr_19_22": 0.024633556487680508
+  },
+  {
+    "state": "Tripura",
+    "incidence_2019": 2507,
+    "incidence_2020": 2574,
+    "incidence_2021": 2623,
+    "incidence_2022": 2715,
+    "incidence_cagr_19_22": 0.026924463973807322
+  },
+  {
+    "state": "Uttar Pradesh",
+    "incidence_2019": 196652,
+    "incidence_2020": 201319,
+    "incidence_2021": 206088,
+    "incidence_2022": 210958,
+    "incidence_cagr_19_22": 0.02368391012837634
+  },
+  {
+    "state": "Uttarakhand",
+    "incidence_2019": 11216,
+    "incidence_2020": 11482,
+    "incidence_2021": 11779,
+    "incidence_2022": 12065,
+    "incidence_cagr_19_22": 0.02462065997488261
+  },
+  {
+    "state": "West Bengal",
+    "incidence_2019": 105814,
+    "incidence_2020": 108394,
+    "incidence_2021": 110972,
+    "incidence_2022": 113581,
+    "incidence_cagr_19_22": 0.023892083976358558
+  }
+]

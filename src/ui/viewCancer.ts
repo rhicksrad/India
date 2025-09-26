@@ -6,6 +6,13 @@ import { createLegend } from '../viz/legend';
 const YEARS = ['2019', '2020', '2021', '2022'] as const;
 type YearKey = (typeof YEARS)[number];
 
+const YEAR_VALUE_KEYS: Record<YearKey, keyof AppData['cancer'][number]> = {
+  '2019': 'incidence_per_100k_2019',
+  '2020': 'incidence_per_100k_2020',
+  '2021': 'incidence_per_100k_2021',
+  '2022': 'incidence_per_100k_2022'
+};
+
 export function renderCancerView(root: HTMLElement, data: AppData) {
   root.innerHTML = '';
   root.className = 'view view-cancer';
@@ -35,11 +42,11 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
       <div class="legend-container"></div>
     </div>
     <div class="panel-section">
-      <h3>Top 5 incidence</h3>
+      <h3>Top 5 incidence per 100k</h3>
       <ol class="list top-list"></ol>
     </div>
     <div class="panel-section">
-      <h3>Bottom 5 incidence</h3>
+      <h3>Bottom 5 incidence per 100k</h3>
       <ol class="list bottom-list"></ol>
     </div>
   `;
@@ -63,33 +70,49 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
   function computeMapValues(year: YearKey) {
     const map = new Map<string, number | null>();
     for (const row of data.cancer) {
-      const key = `incidence_${year}` as const;
+      const key = YEAR_VALUE_KEYS[year];
       const value = row[key] as number | null;
       map.set(row.state, value ?? null);
     }
     return map;
   }
 
-  function formatValue(value: number | null) {
+  function formatPer100k(value: number | null) {
+    if (value == null) return 'No data';
+    return `${value.toFixed(1)} per 100k`;
+  }
+
+  function formatCount(value: number | null) {
     if (value == null) return 'No data';
     return value.toLocaleString('en-IN');
   }
 
   function updateLists(year: YearKey) {
-    const key = `incidence_${year}` as const;
+    const perCapitaKey = YEAR_VALUE_KEYS[year];
+    const totalKey = `incidence_${year}` as const;
     const entries = data.cancer
-      .map((row) => ({ state: row.state, value: row[key] as number | null }))
-      .filter((d): d is { state: string; value: number } => d.value != null)
-      .sort((a, b) => b.value - a.value);
+      .map((row) => ({
+        state: row.state,
+        perCapita: row[perCapitaKey] as number | null,
+        total: row[totalKey] as number | null
+      }))
+      .filter((d): d is { state: string; perCapita: number; total: number | null } => d.perCapita != null)
+      .sort((a, b) => b.perCapita - a.perCapita);
 
     const top = entries.slice(0, 5);
     const bottom = entries.slice(-5).reverse();
 
     topList.innerHTML = top
-      .map((d) => `<li><span>${d.state}</span><span>${d.value.toLocaleString('en-IN')}</span></li>`)
+      .map(
+        (d) =>
+          `<li><span>${d.state}</span><span>${d.perCapita.toFixed(1)} per 100k (${formatCount(d.total)})</span></li>`
+      )
       .join('');
     bottomList.innerHTML = bottom
-      .map((d) => `<li><span>${d.state}</span><span>${d.value.toLocaleString('en-IN')}</span></li>`)
+      .map(
+        (d) =>
+          `<li><span>${d.state}</span><span>${d.perCapita.toFixed(1)} per 100k (${formatCount(d.total)})</span></li>`
+      )
       .join('');
   }
 
@@ -109,20 +132,24 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
       tooltipFormatter: (state, value) => {
         const cancerRow = byState.get(state);
         const growth = cancerRow?.incidence_cagr_19_22;
+        const totalKey = `incidence_${year}` as const;
+        const totalValue = cancerRow?.[totalKey] as number | null | undefined;
         const growthText = growth == null ? '—' : `${(growth * 100).toFixed(2)}% CAGR (2019-22)`;
         return `
           <div class="tooltip-title">${state}</div>
-          <div>${year}: ${formatValue(value)}</div>
+          <div>${year}: ${formatPer100k(value)}</div>
+          <div>${year} total: ${formatCount(totalValue ?? null)}</div>
           <div>CAGR: ${growthText}</div>
         `;
       }
     });
 
     legend.update({
+
       title: `Incidence ${year}`,
       domain: scaleDomain,
       scale: (v) => scale(v),
-      format: (v) => Math.round(v).toLocaleString('en-IN')
+      format: (v) => v.toFixed(1)
     });
 
     updateLists(year);

@@ -121,7 +121,9 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
     const numericValues = Array.from(values.values()).filter((v): v is number => v != null);
     const extent = d3.extent(numericValues) as [number, number] | undefined;
     const domain: [number, number] = extent ?? [0, 1];
-    const scale = d3.scaleSequential(d3.interpolateReds).domain(domain[0] === domain[1] ? [0, domain[0] || 1] : domain);
+    const palette = d3.interpolateRgbBasis(['#0b2135', '#ff9933', '#f6efe3', '#138808']);
+    const scaleDomain: [number, number] = domain[0] === domain[1] ? [0, domain[0] || 1] : domain;
+    const scale = d3.scaleSequential(palette).domain(scaleDomain);
 
     choropleth.update({
       data: values,
@@ -143,8 +145,9 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
     });
 
     legend.update({
-      title: `Incidence per 100k (${year})`,
-      domain,
+
+      title: `Incidence ${year}`,
+      domain: scaleDomain,
       scale: (v) => scale(v),
       format: (v) => v.toFixed(1)
     });

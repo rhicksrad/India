@@ -1,290 +1,470 @@
 [
   {
     "state": "Andaman and Nicobar Islands",
+    "population": 419978,
     "incidence_2019": 357,
     "incidence_2020": 366,
     "incidence_2021": 380,
     "incidence_2022": 393,
-    "incidence_cagr_19_22": 0.03254291590444591
+    "incidence_cagr_19_22": 0.03254291590444591,
+    "incidence_per_100k_2019": 85.00445261418454,
+    "incidence_per_100k_2020": 87.14742200781946,
+    "incidence_per_100k_2021": 90.48092995347375,
+    "incidence_per_100k_2022": 93.57633018872417
   },
   {
     "state": "Andhra Pradesh",
+    "population": 53903393,
     "incidence_2019": 68883,
     "incidence_2020": 70424,
     "incidence_2021": 71970,
     "incidence_2022": 73536,
-    "incidence_cagr_19_22": 0.022027660362719192
+    "incidence_cagr_19_22": 0.022027660362719192,
+    "incidence_per_100k_2019": 127.78972930331119,
+    "incidence_per_100k_2020": 130.64854748568425,
+    "incidence_per_100k_2021": 133.516641521991,
+    "incidence_per_100k_2022": 136.42183897403268
   },
   {
     "state": "Arunachal Pradesh",
+    "population": 1570458,
     "incidence_2019": 1015,
     "incidence_2020": 1035,
     "incidence_2021": 1064,
     "incidence_2022": 1087,
-    "incidence_cagr_19_22": 0.02310726196810453
+    "incidence_cagr_19_22": 0.02310726196810453,
+    "incidence_per_100k_2019": 64.63082744014804,
+    "incidence_per_100k_2020": 65.90434128133322,
+    "incidence_per_100k_2021": 67.75093635105173,
+    "incidence_per_100k_2022": 69.21547726841469
   },
   {
     "state": "Assam",
+    "population": 35607039,
     "incidence_2019": 36948,
     "incidence_2020": 37880,
     "incidence_2021": 38834,
     "incidence_2022": 39787,
-    "incidence_cagr_19_22": 0.024983213803628335
+    "incidence_cagr_19_22": 0.024983213803628335,
+    "incidence_per_100k_2019": 103.76599975077963,
+    "incidence_per_100k_2020": 106.38345974232791,
+    "incidence_per_100k_2021": 109.06270527015741,
+    "incidence_per_100k_2022": 111.73914236451954
   },
   {
     "state": "Bihar",
+    "population": 127403751,
     "incidence_2019": 101014,
     "incidence_2020": 103711,
     "incidence_2021": 106435,
     "incidence_2022": 109274,
-    "incidence_cagr_19_22": 0.026546021064662417
+    "incidence_cagr_19_22": 0.026546021064662417,
+    "incidence_per_100k_2019": 79.28651959391682,
+    "incidence_per_100k_2020": 81.4034117409934,
+    "incidence_per_100k_2021": 83.54149635672815,
+    "incidence_per_100k_2022": 85.76984519082174
   },
   {
     "state": "Chandigarh",
+    "population": 1184743,
     "incidence_2019": 994,
     "incidence_2020": 1024,
     "incidence_2021": 1053,
     "incidence_2022": 1088,
-    "incidence_cagr_19_22": 0.030577928227708773
+    "incidence_cagr_19_22": 0.030577928227708773,
+    "incidence_per_100k_2019": 83.90005258524423,
+    "incidence_per_100k_2020": 86.43224733127776,
+    "incidence_per_100k_2021": 88.88003558577682,
+    "incidence_per_100k_2022": 91.83426278948261
   },
   {
     "state": "Chhattisgarh",
+    "population": 29436231,
     "incidence_2019": 27113,
     "incidence_2020": 27828,
     "incidence_2021": 28529,
     "incidence_2022": 29253,
-    "incidence_cagr_19_22": 0.025646287503098275
+    "incidence_cagr_19_22": 0.025646287503098275,
+    "incidence_per_100k_2019": 92.1075799411956,
+    "incidence_per_100k_2020": 94.5365593849294,
+    "incidence_per_100k_2021": 96.9179783920027,
+    "incidence_per_100k_2022": 99.37753240216114
   },
   {
     "state": "Dadra and Nagar Haveli and Daman and Diu",
+    "population": 867846,
     "incidence_2019": 304,
     "incidence_2020": 330,
     "incidence_2021": 354,
     "incidence_2022": 388,
-    "incidence_cagr_19_22": 0.08472432829500742
+    "incidence_cagr_19_22": 0.08472432829500742,
+    "incidence_per_100k_2019": 35.02925634271518,
+    "incidence_per_100k_2020": 38.02517958255267,
+    "incidence_per_100k_2021": 40.79064718855649,
+    "incidence_per_100k_2022": 44.708392963728585
   },
   {
     "state": "Delhi",
+    "population": 19814000,
     "incidence_2019": 24436,
     "incidence_2020": 25178,
     "incidence_2021": 25969,
     "incidence_2022": 26735,
-    "incidence_cagr_19_22": 0.030425720653812105
+    "incidence_cagr_19_22": 0.030425720653812105,
+    "incidence_per_100k_2019": 123.32694054708793,
+    "incidence_per_100k_2020": 127.07176743716563,
+    "incidence_per_100k_2021": 131.06389421621077,
+    "incidence_per_100k_2022": 134.9298475825174
   },
   {
     "state": "Goa",
+    "population": 1586250,
     "incidence_2019": 1591,
     "incidence_2020": 1618,
     "incidence_2021": 1652,
     "incidence_2022": 1700,
-    "incidence_cagr_19_22": 0.0223342576302612
+    "incidence_cagr_19_22": 0.0223342576302612,
+    "incidence_per_100k_2019": 100.29944838455476,
+    "incidence_per_100k_2020": 102.00157604412924,
+    "incidence_per_100k_2021": 104.14499605988968,
+    "incidence_per_100k_2022": 107.17100078802206
   },
   {
     "state": "Gujarat",
+    "population": 63872399,
     "incidence_2019": 67841,
     "incidence_2020": 69660,
     "incidence_2021": 71507,
     "incidence_2022": 73382,
-    "incidence_cagr_19_22": 0.02651610576320884
+    "incidence_cagr_19_22": 0.02651610576320884,
+    "incidence_per_100k_2019": 106.21332698025012,
+    "incidence_per_100k_2020": 109.06119245654136,
+    "incidence_per_100k_2021": 111.95289533433683,
+    "incidence_per_100k_2022": 114.88843561363649
   },
   {
     "state": "Haryana",
+    "population": 28902198,
     "incidence_2019": 28453,
     "incidence_2020": 29219,
     "incidence_2021": 30015,
     "incidence_2022": 30851,
-    "incidence_cagr_19_22": 0.027338886728712763
+    "incidence_cagr_19_22": 0.027338886728712763,
+    "incidence_per_100k_2019": 98.44579986615551,
+    "incidence_per_100k_2020": 101.09611732644001,
+    "incidence_per_100k_2021": 103.85023312067823,
+    "incidence_per_100k_2022": 106.74274669352137
   },
   {
     "state": "Himachal Pradesh",
+    "population": 7304787,
     "incidence_2019": 8589,
     "incidence_2020": 8799,
     "incidence_2021": 8978,
     "incidence_2022": 9164,
-    "incidence_cagr_19_22": 0.02183512193482362
+    "incidence_cagr_19_22": 0.02183512193482362,
+    "incidence_per_100k_2019": 117.5804304766176,
+    "incidence_per_100k_2020": 120.45525762763513,
+    "incidence_per_100k_2021": 122.90570553255009,
+    "incidence_per_100k_2022": 125.45198100916562
   },
   {
     "state": "Jammu and Kashmir",
+    "population": 13635010,
     "incidence_2019": 12396,
     "incidence_2020": 12726,
     "incidence_2021": 13060,
     "incidence_2022": 13395,
-    "incidence_cagr_19_22": 0.026172527110294164
+    "incidence_cagr_19_22": 0.026172527110294164,
+    "incidence_per_100k_2019": 90.9130246329119,
+    "incidence_per_100k_2020": 93.33326488209396,
+    "incidence_per_100k_2021": 95.78284137672067,
+    "incidence_per_100k_2022": 98.23975193270851
   },
   {
     "state": "Jharkhand",
+    "population": 38471306,
     "incidence_2019": 33045,
     "incidence_2020": 33961,
     "incidence_2021": 34910,
     "incidence_2022": 35860,
-    "incidence_cagr_19_22": 0.02762543015846486
+    "incidence_cagr_19_22": 0.02762543015846486,
+    "incidence_per_100k_2019": 85.89518640204209,
+    "incidence_per_100k_2020": 88.27618173399156,
+    "incidence_per_100k_2021": 90.74295528204838,
+    "incidence_per_100k_2022": 93.21232816998726
   },
   {
     "state": "Karnataka",
+    "population": 67562686,
     "incidence_2019": 83824,
     "incidence_2020": 85968,
     "incidence_2021": 88126,
     "incidence_2022": 90349,
-    "incidence_cagr_19_22": 0.025301650105741924
+    "incidence_cagr_19_22": 0.025301650105741924,
+    "incidence_per_100k_2019": 124.06848360054839,
+    "incidence_per_100k_2020": 127.24183286614745,
+    "incidence_per_100k_2021": 130.43590362881665,
+    "incidence_per_100k_2022": 133.72618134216867
   },
   {
     "state": "Kerala",
+    "population": 35699443,
     "incidence_2019": 56148,
     "incidence_2020": 57155,
     "incidence_2021": 58139,
     "incidence_2022": 59143,
-    "incidence_cagr_19_22": 0.017473295571180048
+    "incidence_cagr_19_22": 0.017473295571180048,
+    "incidence_per_100k_2019": 157.2797648411489,
+    "incidence_per_100k_2020": 160.1005371428344,
+    "incidence_per_100k_2021": 162.8568826690097,
+    "incidence_per_100k_2022": 165.66925147823736
   },
   {
     "state": "Ladakh",
+    "population": 297419,
     "incidence_2019": 279,
     "incidence_2020": 286,
     "incidence_2021": 294,
     "incidence_2022": 302,
-    "incidence_cagr_19_22": 0.02675678136044146
+    "incidence_cagr_19_22": 0.02675678136044146,
+    "incidence_per_100k_2019": 93.80705334897905,
+    "incidence_per_100k_2020": 96.16063533264519,
+    "incidence_per_100k_2021": 98.85044331397793,
+    "incidence_per_100k_2022": 101.54025129531065
   },
   {
     "state": "Lakshadweep",
+    "population": 73199,
     "incidence_2019": 27,
     "incidence_2020": 27,
     "incidence_2021": 28,
     "incidence_2022": 28,
-    "incidence_cagr_19_22": 0.012196323958554078
+    "incidence_cagr_19_22": 0.012196323958554078,
+    "incidence_per_100k_2019": 36.88574980532521,
+    "incidence_per_100k_2020": 36.88574980532521,
+    "incidence_per_100k_2021": 38.25188868700392,
+    "incidence_per_100k_2022": 38.25188868700392
   },
   {
     "state": "Madhya Pradesh",
+    "population": 85358965,
     "incidence_2019": 75911,
     "incidence_2020": 77888,
     "incidence_2021": 79871,
     "incidence_2022": 81901,
-    "incidence_cagr_19_22": 0.025639718088692254
+    "incidence_cagr_19_22": 0.025639718088692254,
+    "incidence_per_100k_2019": 88.93149067587686,
+    "incidence_per_100k_2020": 91.24759186103064,
+    "incidence_per_100k_2021": 93.57072218483437,
+    "incidence_per_100k_2022": 95.94891409472925
   },
   {
     "state": "Maharashtra",
+    "population": 124904071,
     "incidence_2019": 113374,
     "incidence_2020": 116121,
     "incidence_2021": 118906,
     "incidence_2022": 121717,
-    "incidence_cagr_19_22": 0.023951193921118774
+    "incidence_cagr_19_22": 0.023951193921118774,
+    "incidence_per_100k_2019": 90.76885892694402,
+    "incidence_per_100k_2020": 92.9681467307819,
+    "incidence_per_100k_2021": 95.19785788247046,
+    "incidence_per_100k_2022": 97.44838500900423
   },
   {
     "state": "Manipur",
+    "population": 3117011,
     "incidence_2019": 1844,
     "incidence_2020": 1899,
     "incidence_2021": 2022,
     "incidence_2022": 2097,
-    "incidence_cagr_19_22": 0.04378849255250028
+    "incidence_cagr_19_22": 0.04378849255250028,
+    "incidence_per_100k_2019": 59.15923941237295,
+    "incidence_per_100k_2020": 60.923750349292966,
+    "incidence_per_100k_2021": 64.86983844458682,
+    "incidence_per_100k_2022": 67.27598972220503
   },
   {
     "state": "Meghalaya",
+    "population": 3366710,
     "incidence_2019": 2808,
     "incidence_2020": 2879,
     "incidence_2021": 2943,
     "incidence_2022": 3025,
-    "incidence_cagr_19_22": 0.02512326965740974
+    "incidence_cagr_19_22": 0.02512326965740974,
+    "incidence_per_100k_2019": 83.40486706606747,
+    "incidence_per_100k_2020": 85.51375081310835,
+    "incidence_per_100k_2021": 87.4147164442438,
+    "incidence_per_100k_2022": 89.85032865913607
   },
   {
     "state": "Mizoram",
+    "population": 1261231,
     "incidence_2019": 1783,
     "incidence_2020": 1837,
     "incidence_2021": 1919,
     "incidence_2022": 1985,
-    "incidence_cagr_19_22": 0.03642144200454234
+    "incidence_cagr_19_22": 0.03642144200454234,
+    "incidence_per_100k_2019": 141.36982043733462,
+    "incidence_per_100k_2020": 145.65135173493198,
+    "incidence_per_100k_2021": 152.15293629795016,
+    "incidence_per_100k_2022": 157.3859189950136
   },
   {
     "state": "Nagaland",
+    "population": 2249695,
     "incidence_2019": 1719,
     "incidence_2020": 1768,
     "incidence_2021": 1805,
     "incidence_2022": 1854,
-    "incidence_cagr_19_22": 0.02552114095238811
+    "incidence_cagr_19_22": 0.02552114095238811,
+    "incidence_per_100k_2019": 76.41035784850835,
+    "incidence_per_100k_2020": 78.58843087618543,
+    "incidence_per_100k_2021": 80.2330982644314,
+    "incidence_per_100k_2022": 82.41117129210849
   },
   {
     "state": "Odisha",
+    "population": 46356334,
     "incidence_2019": 49604,
     "incidence_2020": 50692,
     "incidence_2021": 51829,
     "incidence_2022": 52960,
-    "incidence_cagr_19_22": 0.02206164911860875
+    "incidence_cagr_19_22": 0.02206164911860875,
+    "incidence_per_100k_2019": 107.00587324269429,
+    "incidence_per_100k_2020": 109.35290957218488,
+    "incidence_per_100k_2021": 111.80564882460293,
+    "incidence_per_100k_2022": 114.2454448619686
   },
   {
     "state": "Puducherry",
+    "population": 1504000,
     "incidence_2019": 1523,
     "incidence_2020": 1577,
     "incidence_2021": 1623,
     "incidence_2022": 1679,
-    "incidence_cagr_19_22": 0.03303950741689432
+    "incidence_cagr_19_22": 0.03303950741689432,
+    "incidence_per_100k_2019": 101.26329787234043,
+    "incidence_per_100k_2020": 104.85372340425532,
+    "incidence_per_100k_2021": 107.9122340425532,
+    "incidence_per_100k_2022": 111.63563829787233
   },
   {
     "state": "Punjab",
+    "population": 30141373,
     "incidence_2019": 37744,
     "incidence_2020": 38636,
     "incidence_2021": 39521,
     "incidence_2022": 40435,
-    "incidence_cagr_19_22": 0.023221934244361142
+    "incidence_cagr_19_22": 0.023221934244361142,
+    "incidence_per_100k_2019": 125.22322722325887,
+    "incidence_per_100k_2020": 128.1826146406801,
+    "incidence_per_100k_2021": 131.11877816581216,
+    "incidence_per_100k_2022": 134.15115495899937
   },
   {
     "state": "Rajasthan",
+    "population": 81032689,
     "incidence_2019": 69156,
     "incidence_2020": 70987,
     "incidence_2021": 72825,
     "incidence_2022": 74725,
-    "incidence_cagr_19_22": 0.02615276419478363
+    "incidence_cagr_19_22": 0.02615276419478363,
+    "incidence_per_100k_2019": 85.34333594680537,
+    "incidence_per_100k_2020": 87.60291787922773,
+    "incidence_per_100k_2021": 89.87113830074182,
+    "incidence_per_100k_2022": 92.21587105421122
   },
   {
     "state": "Sikkim",
+    "population": 690251,
     "incidence_2019": 443,
     "incidence_2020": 445,
     "incidence_2021": 465,
     "incidence_2022": 496,
-    "incidence_cagr_19_22": 0.038387177838682174
+    "incidence_cagr_19_22": 0.038387177838682174,
+    "incidence_per_100k_2019": 64.17955207598396,
+    "incidence_per_100k_2020": 64.46930174675589,
+    "incidence_per_100k_2021": 67.36679845447526,
+    "incidence_per_100k_2022": 71.85791835144026
   },
   {
     "state": "Tamil Nadu",
+    "population": 77841267,
     "incidence_2019": 86596,
     "incidence_2020": 88866,
     "incidence_2021": 91184,
     "incidence_2022": 93536,
-    "incidence_cagr_19_22": 0.02603061751363711
+    "incidence_cagr_19_22": 0.02603061751363711,
+    "incidence_per_100k_2019": 111.24690454999916,
+    "incidence_per_100k_2020": 114.16309552104283,
+    "incidence_per_100k_2021": 117.14095044213502,
+    "incidence_per_100k_2022": 120.16248399451155
   },
   {
     "state": "Telangana",
+    "population": 37173107,
     "incidence_2019": 46464,
     "incidence_2020": 47620,
     "incidence_2021": 48775,
     "incidence_2022": 49983,
-    "incidence_cagr_19_22": 0.024633556487680508
+    "incidence_cagr_19_22": 0.024633556487680508,
+    "incidence_per_100k_2019": 124.99358743405548,
+    "incidence_per_100k_2020": 128.10336246577398,
+    "incidence_per_100k_2021": 131.21044738068304,
+    "incidence_per_100k_2022": 134.46010848649266
   },
   {
     "state": "Tripura",
+    "population": 4169794,
     "incidence_2019": 2507,
     "incidence_2020": 2574,
     "incidence_2021": 2623,
     "incidence_2022": 2715,
-    "incidence_cagr_19_22": 0.026924463973807322
+    "incidence_cagr_19_22": 0.026924463973807322,
+    "incidence_per_100k_2019": 60.12287417555879,
+    "incidence_per_100k_2020": 61.72966818025063,
+    "incidence_per_100k_2021": 62.90478618368198,
+    "incidence_per_100k_2022": 65.1111301901245
   },
   {
     "state": "Uttar Pradesh",
+    "population": 237882725,
     "incidence_2019": 196652,
     "incidence_2020": 201319,
     "incidence_2021": 206088,
     "incidence_2022": 210958,
-    "incidence_cagr_19_22": 0.02368391012837634
+    "incidence_cagr_19_22": 0.02368391012837634,
+    "incidence_per_100k_2019": 82.66762540239104,
+    "incidence_per_100k_2020": 84.62951649809796,
+    "incidence_per_100k_2021": 86.63428586502026,
+    "incidence_per_100k_2022": 88.68151312794993
   },
   {
     "state": "Uttarakhand",
+    "population": 11250858,
     "incidence_2019": 11216,
     "incidence_2020": 11482,
     "incidence_2021": 11779,
     "incidence_2022": 12065,
-    "incidence_cagr_19_22": 0.02462065997488261
+    "incidence_cagr_19_22": 0.02462065997488261,
+    "incidence_per_100k_2019": 99.6901747404509,
+    "incidence_per_100k_2020": 102.05443887035105,
+    "incidence_per_100k_2021": 104.69423754170572,
+    "incidence_per_100k_2022": 107.23626589189908
   },
   {
     "state": "West Bengal",
+    "population": 100043676,
     "incidence_2019": 105814,
     "incidence_2020": 108394,
     "incidence_2021": 110972,
     "incidence_2022": 113581,
-    "incidence_cagr_19_22": 0.023892083976358558
+    "incidence_cagr_19_22": 0.023892083976358558,
+    "incidence_per_100k_2019": 105.76780485355216,
+    "incidence_per_100k_2020": 108.3466785046963,
+    "incidence_per_100k_2021": 110.92355302897907,
+    "incidence_per_100k_2022": 113.53141401961281
   }
 ]

@@ -17,6 +17,7 @@ interface CancerMetricOption {
   formatter: (value: number | null) => string;
   legendFormatter: (value: number) => string;
   isRate: boolean;
+  fallbackRange: number;
 }
 
 const cuisineMetrics: CuisineMetricOption[] = [
@@ -33,16 +34,77 @@ const cuisineMetrics: CuisineMetricOption[] = [
 ];
 
 const cancerMetrics: CancerMetricOption[] = [
-  { key: 'incidence_2019', label: 'Cancer incidence 2019', formatter: formatCount, legendFormatter: formatCount, isRate: false },
-  { key: 'incidence_2020', label: 'Cancer incidence 2020', formatter: formatCount, legendFormatter: formatCount, isRate: false },
-  { key: 'incidence_2021', label: 'Cancer incidence 2021', formatter: formatCount, legendFormatter: formatCount, isRate: false },
-  { key: 'incidence_2022', label: 'Cancer incidence 2022', formatter: formatCount, legendFormatter: formatCount, isRate: false },
+  {
+    key: 'incidence_per_100k_2019',
+    label: 'Cancer incidence per 100k (2019)',
+    formatter: formatPer100k,
+    legendFormatter: (v) => v.toFixed(1),
+    isRate: true,
+    fallbackRange: 10
+  },
+  {
+    key: 'incidence_per_100k_2020',
+    label: 'Cancer incidence per 100k (2020)',
+    formatter: formatPer100k,
+    legendFormatter: (v) => v.toFixed(1),
+    isRate: true,
+    fallbackRange: 10
+  },
+  {
+    key: 'incidence_per_100k_2021',
+    label: 'Cancer incidence per 100k (2021)',
+    formatter: formatPer100k,
+    legendFormatter: (v) => v.toFixed(1),
+    isRate: true,
+    fallbackRange: 10
+  },
+  {
+    key: 'incidence_per_100k_2022',
+    label: 'Cancer incidence per 100k (2022)',
+    formatter: formatPer100k,
+    legendFormatter: (v) => v.toFixed(1),
+    isRate: true,
+    fallbackRange: 10
+  },
+  {
+    key: 'incidence_2019',
+    label: 'Cancer incidence total (2019)',
+    formatter: formatCount,
+    legendFormatter: formatCount,
+    isRate: false,
+    fallbackRange: 1_000
+  },
+  {
+    key: 'incidence_2020',
+    label: 'Cancer incidence total (2020)',
+    formatter: formatCount,
+    legendFormatter: formatCount,
+    isRate: false,
+    fallbackRange: 1_000
+  },
+  {
+    key: 'incidence_2021',
+    label: 'Cancer incidence total (2021)',
+    formatter: formatCount,
+    legendFormatter: formatCount,
+    isRate: false,
+    fallbackRange: 1_000
+  },
+  {
+    key: 'incidence_2022',
+    label: 'Cancer incidence total (2022)',
+    formatter: formatCount,
+    legendFormatter: formatCount,
+    isRate: false,
+    fallbackRange: 1_000
+  },
   {
     key: 'incidence_cagr_19_22',
     label: 'Cancer incidence CAGR (2019-22)',
     formatter: formatPct,
     legendFormatter: (v) => `${(v * 100).toFixed(1)}%`,
-    isRate: true
+    isRate: true,
+    fallbackRange: 0.05
   }
 ];
 
@@ -57,6 +119,10 @@ function formatNumber(value: number | null) {
 
 function formatCount(value: number | null) {
   return value == null ? 'No data' : value.toLocaleString('en-IN');
+}
+
+function formatPer100k(value: number | null) {
+  return value == null ? 'No data' : `${value.toFixed(1)} per 100k`;
 }
 
 export function renderCompareView(root: HTMLElement, data: AppData) {
@@ -148,7 +214,7 @@ export function renderCompareView(root: HTMLElement, data: AppData) {
     option.textContent = metric.label;
     cancerSelect.append(option);
   });
-  cancerSelect.value = 'incidence_2022';
+  cancerSelect.value = 'incidence_per_100k_2022';
 
   function renderResidualDetail(state: string | null) {
     if (!state) {
@@ -245,7 +311,7 @@ export function renderCompareView(root: HTMLElement, data: AppData) {
     });
 
     const maxAbs = d3.max(scatterMetrics.residuals, (d) => Math.abs(d.residual)) ?? 0;
-    const domainValue = maxAbs > 0 ? maxAbs : cancerMetric.isRate ? 0.05 : 1000;
+    const domainValue = maxAbs > 0 ? maxAbs : cancerMetric.fallbackRange;
     const scaleDomain: [number, number] = [-domainValue, domainValue];
     const diverging = d3.scaleDiverging((t) => d3.interpolateRdBu(1 - t)).domain([-domainValue, 0, domainValue]);
     colorScale = (value: number) => diverging(value);

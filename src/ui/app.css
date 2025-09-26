@@ -24,6 +24,58 @@ body {
   color: var(--color-text-primary);
 }
 
+.about-panel {
+  margin: 0;
+  padding: 2.5rem 1.5rem 3rem;
+  background: linear-gradient(180deg, rgba(6, 19, 31, 0.95), rgba(3, 10, 19, 0.95));
+  border-top: 1px solid rgba(245, 247, 250, 0.08);
+}
+
+.about-panel__content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-panel__content h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+}
+
+.about-panel__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.about-panel__grid section {
+  background: rgba(11, 33, 53, 0.75);
+  border-radius: 0.85rem;
+  border: 1px solid rgba(245, 247, 250, 0.08);
+  padding: 1.25rem;
+  box-shadow: 0 16px 32px rgba(4, 16, 28, 0.35);
+}
+
+.about-panel__grid h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.02rem;
+  color: var(--color-saffron-soft);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.about-panel__grid p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
 nav {
   display: flex;
   gap: 0.5rem;

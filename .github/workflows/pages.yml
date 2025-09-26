@@ -18,13 +18,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Put pnpm on PATH first
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
-
-      - run: corepack enable
-      - run: corepack prepare pnpm@9 --activate
+          cache: 'pnpm'               # now safe, pnpm exists
+          cache-dependency-path: pnpm-lock.yaml
 
       - run: pnpm -v
 

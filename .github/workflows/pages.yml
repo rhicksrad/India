@@ -1,11 +1,14 @@
 name: Deploy static site to GitHub Pages
+
 on:
   push:
     branches: [main]
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: 'pages'
   cancel-in-progress: false
@@ -26,10 +29,9 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 9
+          run_install: true
 
-      - run: pnpm install --frozen-lockfile
-
-      - run: pnpm run build
+      - run: pnpm run -s build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

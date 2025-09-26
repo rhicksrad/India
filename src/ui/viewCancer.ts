@@ -140,7 +140,7 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
 
     choropleth.update({
       data: values,
-      colorScale: (v) => (v == null ? undefined : scale(v)),
+      colorScale: (v) => scale(v),
       highlighted: null,
       tooltipFormatter: (state, value) => {
         const cancerRow = byState.get(state);

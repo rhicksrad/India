@@ -413,12 +413,13 @@ function main() {
       bucket.cook_n += 1;
     }
     if (details.tokens.length) {
-      if (anyMention(details.tokens, LENTIL_TERMS)) bucket.lentil_like += 1;
-      if (anyMention(details.tokens, RED_MEAT_TERMS)) bucket.red_meat_like += 1;
-      if (anyMention(details.tokens, POULTRY_TERMS)) bucket.poultry += 1;
-      if (anyMention(details.tokens, FISH_TERMS)) bucket.fish += 1;
-      if (anyMention(details.tokens, TURMERIC_TERMS)) bucket.turmeric += 1;
-      for (const token of details.tokens) {
+      const uniqueTokens = Array.from(new Set(details.tokens));
+      if (anyMention(uniqueTokens, LENTIL_TERMS)) bucket.lentil_like += 1;
+      if (anyMention(uniqueTokens, RED_MEAT_TERMS)) bucket.red_meat_like += 1;
+      if (anyMention(uniqueTokens, POULTRY_TERMS)) bucket.poultry += 1;
+      if (anyMention(uniqueTokens, FISH_TERMS)) bucket.fish += 1;
+      if (anyMention(uniqueTokens, TURMERIC_TERMS)) bucket.turmeric += 1;
+      for (const token of uniqueTokens) {
         const prev = bucket.ingredient_stats.get(token) ?? 0;
         bucket.ingredient_stats.set(token, prev + 1);
       }

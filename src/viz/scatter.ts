@@ -24,6 +24,51 @@ export interface ScatterConfig {
   height?: number;
 }
 
+export interface ScatterComputation {
+  valid: ScatterPoint[];
+  metrics: ScatterMetrics;
+  xExtent: [number, number];
+  yExtent: [number, number];
+}
+
+export function computeScatter(data: ScatterPoint[]): ScatterComputation | null {
+  const valid = data.filter((d) => Number.isFinite(d.x) && Number.isFinite(d.y));
+  if (valid.length === 0) {
+    return null;
+  }
+
+  const xExtent = d3.extent(valid, (d: ScatterPoint) => d.x) as [number, number];
+  const yExtent = d3.extent(valid, (d: ScatterPoint) => d.y) as [number, number];
+  const meanX = d3.mean(valid, (d: ScatterPoint) => d.x) ?? 0;
+  const meanY = d3.mean(valid, (d: ScatterPoint) => d.y) ?? 0;
+  const varianceX = d3.mean(valid, (d: ScatterPoint) => Math.pow(d.x - meanX, 2)) ?? 0;
+  const varianceY = d3.mean(valid, (d: ScatterPoint) => Math.pow(d.y - meanY, 2)) ?? 0;
+  const covariance = d3.mean(valid, (d: ScatterPoint) => (d.x - meanX) * (d.y - meanY)) ?? 0;
+
+  const slope = varianceX === 0 ? 0 : covariance / varianceX;
+  const intercept = meanY - slope * meanX;
+  const r = varianceX === 0 || varianceY === 0 ? 0 : covariance / Math.sqrt(varianceX * varianceY);
+
+  const residuals = valid.map((d: ScatterPoint) => {
+    const predicted = slope * d.x + intercept;
+    return {
+      state: d.state,
+      actual: d.y,
+      predicted,
+      residual: d.y - predicted
+    };
+  });
+
+  residuals.sort((a, b) => Math.abs(b.residual) - Math.abs(a.residual));
+
+  return {
+    valid,
+    metrics: { slope, intercept, r, residuals },
+    xExtent,
+    yExtent
+  };
+}
+
 export function renderScatter(config: ScatterConfig, data: ScatterPoint[], labels: ScatterLabels): ScatterMetrics | null {
   const { container } = config;
   const width = config.width ?? 420;
@@ -32,14 +77,13 @@ export function renderScatter(config: ScatterConfig, data: ScatterPoint[], label
 
   container.innerHTML = '';
 
-  const valid = data.filter((d) => Number.isFinite(d.x) && Number.isFinite(d.y));
-  if (valid.length === 0) {
+  const computation = computeScatter(data);
+  if (!computation) {
     container.innerHTML = '<p class="empty-state">No overlapping data for selected metrics.</p>';
     return null;
   }
 
-  const xExtent = d3.extent(valid, (d: ScatterPoint) => d.x) as [number, number];
-  const yExtent = d3.extent(valid, (d: ScatterPoint) => d.y) as [number, number];
+  const { valid, metrics, xExtent, yExtent } = computation;
   const xScale = d3.scaleLinear().domain(xExtent).nice().range([margin.left, width - margin.right]);
   const yScale = d3.scaleLinear().domain(yExtent).nice().range([height - margin.bottom, margin.top]);
 
@@ -94,17 +138,7 @@ export function renderScatter(config: ScatterConfig, data: ScatterPoint[], label
     .append('title')
     .text((d: ScatterPoint) => `${d.state}\n${labels.xLabel}: ${d.x.toFixed(2)}\n${labels.yLabel}: ${d.y.toFixed(2)}`);
 
-  const meanX = d3.mean(valid, (d: ScatterPoint) => d.x) ?? 0;
-  const meanY = d3.mean(valid, (d: ScatterPoint) => d.y) ?? 0;
-  const varianceX = d3.mean(valid, (d: ScatterPoint) => Math.pow(d.x - meanX, 2)) ?? 0;
-  const varianceY = d3.mean(valid, (d: ScatterPoint) => Math.pow(d.y - meanY, 2)) ?? 0;
-  const covariance = d3.mean(valid, (d: ScatterPoint) => (d.x - meanX) * (d.y - meanY)) ?? 0;
-
-  const slope = varianceX === 0 ? 0 : covariance / varianceX;
-  const intercept = meanY - slope * meanX;
-  const r = varianceX === 0 || varianceY === 0 ? 0 : covariance / Math.sqrt(varianceX * varianceY);
-
-  const linePoints = [xScale.domain()[0], xScale.domain()[1]].map((x) => ({ x, y: slope * x + intercept }));
+  const linePoints = [xScale.domain()[0], xScale.domain()[1]].map((x) => ({ x, y: metrics.slope * x + metrics.intercept }));
   svg
     .append('line')
     .attr('class', 'regression-line')
@@ -116,17 +150,5 @@ export function renderScatter(config: ScatterConfig, data: ScatterPoint[], label
     .attr('stroke-width', 2)
     .attr('opacity', 0.8);
 
-  const residuals = valid.map((d: ScatterPoint) => {
-    const predicted = slope * d.x + intercept;
-    return {
-      state: d.state,
-      actual: d.y,
-      predicted,
-      residual: d.y - predicted
-    };
-  });
-
-  residuals.sort((a, b) => Math.abs(b.residual) - Math.abs(a.residual));
-
-  return { slope, intercept, r, residuals };
+  return metrics;
 }

@@ -95,7 +95,7 @@ export function renderCuisineView(root: HTMLElement, data: AppData) {
   const cuisineByState = new Map(data.cuisine.map((row) => [row.state, row]));
 
   let currentValues = new Map<string, number | null>();
-  let currentColorScale: (value: number) => string = () => '#ccc';
+  let currentColorScale: (value: number) => string = () => '#163346';
   const tooltipFormatter = (state: string, value: number | null) => {
     const metric = METRICS.find((m) => m.key === (metricSelect.value as keyof CuisineStateMetrics));
     const row = cuisineByState.get(state);
@@ -149,7 +149,8 @@ export function renderCuisineView(root: HTMLElement, data: AppData) {
     const extent = d3.extent(numericValues) as [number, number] | undefined;
     const domain: [number, number] = extent ?? [0, 1];
     const scaleDomain: [number, number] = domain[0] === domain[1] ? [0, domain[0] || 1] : domain;
-    const sequential = d3.scaleSequential(d3.interpolateViridis).domain(scaleDomain);
+    const palette = d3.interpolateRgbBasis(['#0b2135', '#ff9933', '#f6efe3', '#138808']);
+    const sequential = d3.scaleSequential(palette).domain(scaleDomain);
     currentColorScale = (v: number) => sequential(v);
 
     const legendFormatter = metricKey.startsWith('avg') || metricKey === 'dish_count'

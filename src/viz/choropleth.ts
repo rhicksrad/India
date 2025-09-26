@@ -74,6 +74,10 @@ export function createChoropleth(config: ChoroplethConfig) {
     .attr('preserveAspectRatio', 'xMidYMid meet')
     .attr('class', 'choropleth-svg');
 
+  const DEFAULT_FILL = '#10273a';
+  const NO_DATA_FILL = '#0b1d2c';
+  const BORDER_COLOR = 'rgba(245, 247, 250, 0.28)';
+
   const states = svg
     .append('g')
     .selectAll<SVGPathElement, StateFeature>('path')
@@ -82,9 +86,9 @@ export function createChoropleth(config: ChoroplethConfig) {
     .append('path')
     .attr('d', path as any)
     .attr('class', 'choropleth-state')
-    .attr('fill', '#f5f5f5')
-    .attr('stroke', '#999')
-    .attr('stroke-width', 0.8)
+    .attr('fill', DEFAULT_FILL)
+    .attr('stroke', BORDER_COLOR)
+    .attr('stroke-width', 0.6)
     .attr('vector-effect', 'non-scaling-stroke');
 
   const tooltip = d3
@@ -96,7 +100,7 @@ export function createChoropleth(config: ChoroplethConfig) {
   let currentData = new Map<string, number | null>();
   let currentFormatter: ChoroplethUpdateOptions['tooltipFormatter'] = () => '';
   let currentHighlighted: string | null = null;
-  let currentColorScale: (value: number) => string = () => '#ccc';
+  let currentColorScale: (value: number) => string = () => DEFAULT_FILL;
 
   function showTooltip(state: string, value: number | null, event: MouseEvent) {
     tooltip
@@ -143,7 +147,7 @@ export function createChoropleth(config: ChoroplethConfig) {
     states.attr('fill', (d: StateFeature) => {
       const name = d.properties?.__stateName ?? '';
       const value = currentData.get(name);
-      return value == null ? '#e6e6e6' : currentColorScale(value);
+      return value == null ? NO_DATA_FILL : currentColorScale(value);
     });
   }
 

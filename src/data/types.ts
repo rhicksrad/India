@@ -1,10 +1,15 @@
 export interface CancerStateMetrics {
   state: string;
+  population: number | null;
   incidence_2019: number | null;
   incidence_2020: number | null;
   incidence_2021: number | null;
   incidence_2022: number | null;
   incidence_cagr_19_22: number | null;
+  incidence_per_100k_2019: number | null;
+  incidence_per_100k_2020: number | null;
+  incidence_per_100k_2021: number | null;
+  incidence_per_100k_2022: number | null;
 }
 
 export interface CuisineStateMetrics {

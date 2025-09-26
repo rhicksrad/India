@@ -23,6 +23,46 @@ const ROOT = path.resolve(process.cwd());
 const DERIVED = path.join(ROOT, 'public', 'derived');
 fs.mkdirSync(DERIVED, { recursive: true });
 
+const STATE_POPULATION_2021: Record<string, number> = {
+  'Andaman and Nicobar Islands': 419_978,
+  'Andhra Pradesh': 53_903_393,
+  'Arunachal Pradesh': 1_570_458,
+  Assam: 35_607_039,
+  Bihar: 127_403_751,
+  Chandigarh: 1_184_743,
+  Chhattisgarh: 29_436_231,
+  'Dadra and Nagar Haveli and Daman and Diu': 867_846,
+  Delhi: 19_814_000,
+  Goa: 1_586_250,
+  Gujarat: 63_872_399,
+  Haryana: 28_902_198,
+  'Himachal Pradesh': 7_304_787,
+  Jharkhand: 38_471_306,
+  Karnataka: 67_562_686,
+  Kerala: 35_699_443,
+  'Madhya Pradesh': 85_358_965,
+  Maharashtra: 124_904_071,
+  Manipur: 3_117_011,
+  Meghalaya: 3_366_710,
+  Mizoram: 1_261_231,
+  Nagaland: 2_249_695,
+  Odisha: 46_356_334,
+  Puducherry: 1_504_000,
+  Punjab: 30_141_373,
+  Rajasthan: 81_032_689,
+  Sikkim: 690_251,
+  'Tamil Nadu': 77_841_267,
+  Telangana: 37_173_107,
+  Tripura: 4_169_794,
+  'Uttar Pradesh': 237_882_725,
+  Uttarakhand: 11_250_858,
+  'West Bengal': 100_043_676,
+  'Jammu and Kashmir': 13_635_010,
+  Ladakh: 297_419,
+  Lakshadweep: 73_199,
+  'Andaman & Nicobar Islands': 419_978
+};
+
 const normMap: Record<string, string> = {
   'NCT of Delhi': 'Delhi',
   'National Capital Territory of Delhi': 'Delhi',
@@ -106,6 +146,7 @@ function main() {
     const v2022 = toNum(row['2022']);
     const bucket = (cancerByState[state] ??= {
       state,
+      population: STATE_POPULATION_2021[state] ?? STATE_POPULATION_2021[rawState] ?? null,
       incidence_2019: 0,
       incidence_2020: 0,
       incidence_2021: 0,
@@ -125,8 +166,20 @@ function main() {
     const v2019 = bucket.incidence_2019;
     const v2022 = bucket.incidence_2022;
     bucket.incidence_cagr_19_22 = v2019 != null && v2022 != null ? cagr(v2019, v2022, 3) : null;
+    const population = bucket.population ?? null;
+    for (const year of [2019, 2020, 2021, 2022] as const) {
+      const incidenceValue = bucket[`incidence_${year}`];
+      bucket[`incidence_per_100k_${year}`] =
+        incidenceValue != null && population
+          ? (incidenceValue / population) * 100_000
+          : null;
+    }
   }
   const cancerRows = Object.values(cancerByState).sort((a, b) => a.state.localeCompare(b.state));
+  const missingPopulation = cancerRows.filter((row) => row.population == null).map((row) => row.state);
+  if (missingPopulation.length) {
+    throw new Error(`Missing population for states: ${missingPopulation.join(', ')}`);
+  }
   fs.writeFileSync(path.join(DERIVED, 'cancer_by_state.json'), JSON.stringify(cancerRows, null, 2));
 
   const cuisineAcc: Record<string, any> = {};

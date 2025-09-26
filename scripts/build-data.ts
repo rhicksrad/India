@@ -10,13 +10,35 @@ type CancerRow = {
   ['2022']?: string;
 };
 
-type FoodRow = {
-  state?: string;
+type ArchanaFoodRow = {
+  recipe_name?: string;
+  diet?: string;
+  prep_time_mins?: string;
+  cook_time_mins?: string;
+  course?: string;
+  cuisine?: string;
+  translated_ingredients?: string;
+};
+
+type LegacyFoodRow = {
+  name?: string;
   ingredients?: string;
   diet?: string;
   flavor_profile?: string;
   prep_time?: string;
   cook_time?: string;
+  state?: string;
+  course?: string;
+};
+
+type ManualFoodRow = {
+  state: string;
+  recipe_name: string;
+  diet: string;
+  is_sweet?: boolean;
+  prep_time_mins?: number;
+  cook_time_mins?: number;
+  ingredients: string[];
 };
 
 const ROOT = path.resolve(process.cwd());
@@ -100,6 +122,144 @@ const norm = (s: string) => {
 
 const readCSV = (p: string) => csvParse(fs.readFileSync(p, 'utf8'));
 
+const SWEET_NAME_KEYWORDS = [
+  'sweet',
+  'halwa',
+  'laddu',
+  'ladoo',
+  'barfi',
+  'burfi',
+  'kheer',
+  'payasam',
+  'peda',
+  'rasgulla',
+  'rasmalai',
+  'kesari',
+  'jalebi',
+  'sheera',
+  'poli',
+  'mithai',
+  'malpua',
+  'gulab jamun',
+  'sandesh',
+  'shrikhand',
+  'ghewar',
+  'modak',
+  'kulfi',
+  'puran poli'
+];
+
+const SWEET_INGREDIENT_KEYWORDS = [
+  'sugar',
+  'jaggery',
+  'honey',
+  'condensed milk',
+  'khoya',
+  'mawa',
+  'rabdi',
+  'gud',
+  'treacle',
+  'molasses',
+  'palm jaggery',
+  'dates',
+  'khoa'
+];
+
+const CUISINE_TO_STATE: Array<[RegExp, string]> = [
+  [/\bandhra\b|rayalaseema|nellore|guntur/, 'Andhra Pradesh'],
+  [/\btelangana\b|hyderabadi|nizam/, 'Telangana'],
+  [/\bbengal\b|\bbengali\b|kolkata|calcutta/, 'West Bengal'],
+  [/\bodia\b|\boriya\b|\bodisha\b|cuttack|bhubaneswar/, 'Odisha'],
+  [/\bassam\b|\bassamese\b|ahom|bihu/, 'Assam'],
+  [/\bbihar\b|\bbihari\b|magahi/, 'Bihar'],
+  [/\barunachal\b|monpa|adi|nyishi/, 'Arunachal Pradesh'],
+  [/\bchh?attisgarh\b|bastar/, 'Chhattisgarh'],
+  [/\bgoa\b|\bgoan\b/, 'Goa'],
+  [/\bgujarat\b|\bgujarati\b|kathiyawadi|kathiawadi|surti/, 'Gujarat'],
+  [/\bharyana\b|haryanvi/, 'Haryana'],
+  [/\bhimachal\b|pahari|kangra/, 'Himachal Pradesh'],
+  [/\bjharkhand\b|chota nagpur/, 'Jharkhand'],
+  [/\bkarnataka\b|mangalorean|udupi|coorg|kodava|malnad|coastal karnataka|north karnataka|south karnataka|mysore/, 'Karnataka'],
+  [/\bkerala\b|malabar|onam|nadan/, 'Kerala'],
+  [/\bmadhya pradesh\b|malwa|bagheli|baghelkhand|mahakoshal|bhopal|indore/, 'Madhya Pradesh'],
+  [/\bmaharashtra\b|maharashtrian|konkan|malvani|vidarbha|kolhapuri|parsi/, 'Maharashtra'],
+  [/\bmanipur\b|manipuri|meitei/, 'Manipur'],
+  [/\bmeghalaya\b|khasi|jaintia|garo/, 'Meghalaya'],
+  [/\bmizoram\b|mizo/, 'Mizoram'],
+  [/\bnagaland\b|\bnaga\b/, 'Nagaland'],
+  [/\bsikkim\b|lepcha|bhutia/, 'Sikkim'],
+  [/\btamil\b|chettinad|kongunadu|madurai|tirunelveli/, 'Tamil Nadu'],
+  [/\buttar pradesh\b|awadhi|lucknowi|banarasi|kashi/, 'Uttar Pradesh'],
+  [/\buttarakhand\b|uttarakhand\b|kumaon|garhwal|garhwali/, 'Uttarakhand'],
+  [/\bpunjab\b|punjabi|amritsar/, 'Punjab'],
+  [/\brajasthan\b|rajasthani|marwari|jaipuri|jodhpuri/, 'Rajasthan'],
+  [/\bdelhi\b|dilli/, 'Delhi'],
+  [/\bchandigarh\b/, 'Chandigarh'],
+  [/\bpuducherry\b|pondicherry/, 'Puducherry'],
+  [/\bandaman\b|nicobar|car nicobar/, 'Andaman and Nicobar Islands'],
+  [/\blakshadweep\b|laccadive|minicoy/, 'Lakshadweep'],
+  [/\bdadra\b|nagar haveli|daman|\bdiu\b/, 'Dadra and Nagar Haveli and Daman and Diu'],
+  [/\bladakh\b|ladakhi/, 'Ladakh'],
+  [/\bkashmir\b|kashmiri|kashmiri pandit/, 'Jammu and Kashmir'],
+  [/\btripura\b|tripuri|kokborok/, 'Tripura'],
+  [/\bgoan\b/, 'Goa'],
+  [/\bkonkani\b/, 'Goa'],
+  [/\bharyana\b/, 'Haryana'],
+  [/\bbastar\b/, 'Chhattisgarh'],
+  [/\bhimachali\b/, 'Himachal Pradesh']
+];
+
+function normalizeStateText(label: string) {
+  return label
+    .toLowerCase()
+    .replace(/recipes?/g, '')
+    .replace(/cuisine/g, '')
+    .replace(/[^a-z\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function inferStateFromText(rawText: string | undefined | null): string | null {
+  if (!rawText) return null;
+  const normalized = normalizeStateText(rawText);
+  if (!normalized) return null;
+  for (const [pattern, state] of CUISINE_TO_STATE) {
+    if (pattern.test(normalized)) {
+      return state;
+    }
+  }
+  return null;
+}
+
+function classifyDiet(rawDiet: string | undefined | null): 'vegetarian' | 'non-vegetarian' | null {
+  if (!rawDiet) return null;
+  const diet = rawDiet.toLowerCase();
+  if (diet.includes('non')) return 'non-vegetarian';
+  if (diet.includes('egg')) return 'non-vegetarian';
+  if (diet.includes('veg')) return 'vegetarian';
+  return null;
+}
+
+function detectSweetness(
+  name: string,
+  course: string | undefined,
+  tokens: string[],
+  rawIngredients: string
+): boolean {
+  const courseLower = course?.toLowerCase() ?? '';
+  if (courseLower.includes('dessert') || courseLower.includes('sweet')) return true;
+  const lowerName = name.toLowerCase();
+  if (SWEET_NAME_KEYWORDS.some((kw) => lowerName.includes(kw))) return true;
+  const rawLower = rawIngredients.toLowerCase();
+  if (SWEET_INGREDIENT_KEYWORDS.some((kw) => rawLower.includes(kw))) {
+    return true;
+  }
+  if (tokens.some((token) => SWEET_INGREDIENT_KEYWORDS.some((kw) => kw.includes(' ') ? false : token.includes(kw)))) {
+    return true;
+  }
+  return false;
+}
+
 function cagr(v0: number, v1: number, years: number) {
   if (!isFinite(v0) || !isFinite(v1) || v0 <= 0 || years <= 0) return null;
   return Math.pow(v1 / v0, 1 / years) - 1;
@@ -116,10 +276,11 @@ function tokenizeIngredients(s: string): string[] {
 }
 
 const LENTIL_TERMS = ['lentil', 'dal', 'toor', 'masoor', 'moong', 'chana', 'chickpea', 'arhar', 'urad'];
-const RED_MEAT_TERMS = ['mutton', 'lamb', 'pork', 'beef'];
-const POULTRY_TERMS = ['chicken'];
-const FISH_TERMS = ['fish'];
+const RED_MEAT_TERMS = ['mutton', 'lamb', 'pork', 'beef', 'yak'];
+const POULTRY_TERMS = ['chicken', 'duck'];
+const FISH_TERMS = ['fish', 'prawn', 'prawns', 'shrimp', 'tuna', 'pomfret', 'crab', 'seafood'];
 const TURMERIC_TERMS = ['turmeric', 'haldi'];
+const NON_VEG_TERMS = ['chicken', 'mutton', 'lamb', 'pork', 'beef', 'fish', 'prawn', 'prawns', 'shrimp', 'egg', 'eggs', 'crab', 'tuna', 'clam'];
 
 function anyMention(tokens: string[], terms: string[]) {
   return tokens.some((token) => terms.some((term) => token.includes(term)));
@@ -133,7 +294,13 @@ function toNum(x?: string) {
 
 function main() {
   const cancerCSV = readCSV(path.join(ROOT, 'data', 'cancer_incidence_india.csv')) as unknown as CancerRow[];
-  const foodCSV = readCSV(path.join(ROOT, 'data', 'indian_food.csv')) as unknown as FoodRow[];
+  const archanaCSV = readCSV(
+    path.join(ROOT, 'data', 'archanaskitchen_recipes.csv')
+  ) as unknown as ArchanaFoodRow[];
+  const legacyCSV = readCSV(path.join(ROOT, 'data', 'legacy_indian_food.csv')) as unknown as LegacyFoodRow[];
+  const manualJSON = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'data', 'manual_ut_recipes.json'), 'utf8')
+  ) as ManualFoodRow[];
 
   const cancerByState: Record<string, any> = {};
   for (const row of cancerCSV) {
@@ -182,18 +349,38 @@ function main() {
   }
   fs.writeFileSync(path.join(DERIVED, 'cancer_by_state.json'), JSON.stringify(cancerRows, null, 2));
 
-  const cuisineAcc: Record<string, any> = {};
-  for (const row of foodCSV) {
-    const stateRaw = (row.state ?? '').trim();
-    if (!stateRaw) continue;
-    const state = norm(stateRaw);
-    if (!state || state === '-1') continue;
-    const diet = (row.diet ?? '').trim().toLowerCase();
-    const flavor = (row.flavor_profile ?? '').trim().toLowerCase();
-    const prep = toNum(row.prep_time);
-    const cook = toNum(row.cook_time);
-    const tokens = tokenizeIngredients(row.ingredients ?? '');
+  const cuisineAcc: Record<
+    string,
+    {
+      state: string;
+      dish_count: number;
+      veg: number;
+      sweet: number;
+      prep_sum: number;
+      prep_n: number;
+      cook_sum: number;
+      cook_n: number;
+      lentil_like: number;
+      red_meat_like: number;
+      poultry: number;
+      fish: number;
+      turmeric: number;
+      ingredient_stats: Map<string, number>;
+    }
+  > = {};
 
+  const addObservation = (
+    stateRaw: string,
+    details: {
+      diet: 'vegetarian' | 'non-vegetarian' | null;
+      sweet: boolean;
+      prep: number | null;
+      cook: number | null;
+      tokens: string[];
+    }
+  ) => {
+    const state = norm(stateRaw);
+    if (!state || state === '-1') return;
     const bucket = (cuisineAcc[state] ??= {
       state,
       dish_count: 0,
@@ -210,29 +397,71 @@ function main() {
       turmeric: 0,
       ingredient_stats: new Map<string, number>()
     });
-
     bucket.dish_count += 1;
-    if (diet === 'vegetarian') bucket.veg += 1;
-    if (flavor === 'sweet') bucket.sweet += 1;
-    if (prep != null) {
-      bucket.prep_sum += prep;
+    const hasAnimalProtein = details.tokens.some((token) =>
+      NON_VEG_TERMS.some((term) => token.includes(term))
+    );
+    const isVegetarian = details.diet === 'vegetarian' && !hasAnimalProtein;
+    if (isVegetarian) bucket.veg += 1;
+    if (details.sweet) bucket.sweet += 1;
+    if (details.prep != null) {
+      bucket.prep_sum += details.prep;
       bucket.prep_n += 1;
     }
-    if (cook != null) {
-      bucket.cook_sum += cook;
+    if (details.cook != null) {
+      bucket.cook_sum += details.cook;
       bucket.cook_n += 1;
     }
-    if (tokens.length) {
-      if (anyMention(tokens, LENTIL_TERMS)) bucket.lentil_like += 1;
-      if (anyMention(tokens, RED_MEAT_TERMS)) bucket.red_meat_like += 1;
-      if (anyMention(tokens, POULTRY_TERMS)) bucket.poultry += 1;
-      if (anyMention(tokens, FISH_TERMS)) bucket.fish += 1;
-      if (anyMention(tokens, TURMERIC_TERMS)) bucket.turmeric += 1;
-      for (const token of tokens) {
+    if (details.tokens.length) {
+      if (anyMention(details.tokens, LENTIL_TERMS)) bucket.lentil_like += 1;
+      if (anyMention(details.tokens, RED_MEAT_TERMS)) bucket.red_meat_like += 1;
+      if (anyMention(details.tokens, POULTRY_TERMS)) bucket.poultry += 1;
+      if (anyMention(details.tokens, FISH_TERMS)) bucket.fish += 1;
+      if (anyMention(details.tokens, TURMERIC_TERMS)) bucket.turmeric += 1;
+      for (const token of details.tokens) {
         const prev = bucket.ingredient_stats.get(token) ?? 0;
         bucket.ingredient_stats.set(token, prev + 1);
       }
     }
+  };
+
+  for (const row of archanaCSV) {
+    const stateFromCuisine =
+      inferStateFromText(row.cuisine) || inferStateFromText(row.recipe_name) || inferStateFromText(row.course);
+    if (!stateFromCuisine) continue;
+    const name = (row.recipe_name ?? '').trim();
+    if (!name) continue;
+    const diet = classifyDiet(row.diet);
+    const prep = toNum(row.prep_time_mins);
+    const cook = toNum(row.cook_time_mins);
+    const ingredientsRaw = (row.translated_ingredients ?? '').trim();
+    const tokens = tokenizeIngredients(ingredientsRaw);
+    const sweet = detectSweetness(name, row.course, tokens, ingredientsRaw);
+    addObservation(stateFromCuisine, { diet, sweet, prep, cook, tokens });
+  }
+
+  for (const row of legacyCSV) {
+    const state = (row.state ?? '').trim();
+    if (!state) continue;
+    const name = (row.name ?? '').trim();
+    const diet = classifyDiet(row.diet);
+    const prep = toNum(row.prep_time);
+    const cook = toNum(row.cook_time);
+    const ingredientsRaw = row.ingredients ?? '';
+    const tokens = tokenizeIngredients(ingredientsRaw);
+    const flavor = (row.flavor_profile ?? '').trim().toLowerCase();
+    const sweet = flavor === 'sweet' || detectSweetness(name, row.course, tokens, ingredientsRaw);
+    addObservation(state, { diet, sweet, prep, cook, tokens });
+  }
+
+  for (const entry of manualJSON) {
+    const ingredientsRaw = entry.ingredients.join(', ');
+    const tokens = tokenizeIngredients(ingredientsRaw);
+    const diet = classifyDiet(entry.diet);
+    const sweet = entry.is_sweet ?? detectSweetness(entry.recipe_name, undefined, tokens, ingredientsRaw);
+    const prep = entry.prep_time_mins ?? null;
+    const cook = entry.cook_time_mins ?? null;
+    addObservation(entry.state, { diet, sweet, prep, cook, tokens });
   }
 
   const cuisineRows = Object.values(cuisineAcc)

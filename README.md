@@ -4,12 +4,14 @@ This project explores potential relationships between Indian regional cuisine pa
 
 ## Data
 
-The repository includes two source CSV files under `data/`:
+The repository includes multiple source files under `data/`:
 
 - `cancer_incidence_india.csv`: annual incident cancer case counts per State/UT (2019–2022). Source: RS_Session_258_AU_1555_1.csv (provided).
-- `indian_food.csv`: dishes by region/state with ingredients, diet, timings, and flavor profile from the “Indian Food 101” dataset.
+- `archanaskitchen_recipes.csv`: 4.7k+ Indian recipes with ingredient lists, dietary labels, prep/cook timings, course tags, and recipe URLs curated from the [IndianFoodDatasetGeneration](https://github.com/kanishk307/IndianFoodDatasetGeneration) export of Archana's Kitchen.
+- `legacy_indian_food.csv`: the original “Indian Food 101” state-tagged dish list retained for historical context and supplemental coverage.
+- `manual_ut_recipes.json`: a small set of hand-curated union-territory dishes (for UTs absent from public datasets) to ensure every state/UT has cuisine representation.
 
-A preprocessing script (`scripts/build-data.ts`) normalises state names, aggregates cuisine features, computes incidence CAGR for 2019→2022, and writes derived JSON artifacts to `public/derived/`:
+A preprocessing script (`scripts/build-data.ts`) normalises state names, merges the recipe sources, aggregates cuisine features, computes incidence CAGR for 2019→2022, and writes derived JSON artifacts to `public/derived/`:
 
 - `cancer_by_state.json`
 - `cuisine_by_state.json`

@@ -73,6 +73,14 @@ nav {
   align-items: flex-start;
 }
 
+.card {
+  background: rgba(9, 28, 44, 0.82);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow-elevated);
+  padding: 1.5rem;
+  border: 1px solid rgba(245, 247, 250, 0.06);
+}
+
 .map-column,
 .panel-column {
   background: rgba(9, 28, 44, 0.82);
@@ -90,6 +98,75 @@ nav {
   flex: 1 1 40%;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+.cancer-layout {
+  display: grid;
+  gap: 1.75rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cancer-map-card {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.cancer-map-container {
+  width: 100%;
+}
+
+.cancer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.cancer-controls .control-group {
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.cancer-controls label {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legend-panel {
+  flex: 1 1 320px;
+  min-width: 260px;
+}
+
+.legend-panel h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  color: var(--color-cream);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cancer-stats-card {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.stats-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-section h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  color: var(--color-cream);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .panel-section + .panel-section {
@@ -312,5 +389,13 @@ nav {
 
   .panel-column {
     max-height: unset;
+  }
+
+  .cancer-controls {
+    align-items: stretch;
+  }
+
+  .legend-panel {
+    flex-basis: 100%;
   }
 }

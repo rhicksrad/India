@@ -11,40 +11,51 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
   root.className = 'view view-cancer';
 
   const layout = document.createElement('div');
-  layout.className = 'view-grid';
-  const mapContainer = document.createElement('div');
-  mapContainer.className = 'map-column';
-  const panel = document.createElement('div');
-  panel.className = 'panel-column';
-
-  layout.append(mapContainer, panel);
+  layout.className = 'cancer-layout';
   root.append(layout);
+
+  const mapCard = document.createElement('section');
+  mapCard.className = 'card cancer-map-card';
+  layout.append(mapCard);
+
+  const mapContainer = document.createElement('div');
+  mapContainer.className = 'cancer-map-container';
+  mapCard.append(mapContainer);
+
+  const controls = document.createElement('div');
+  controls.className = 'cancer-controls';
+  controls.innerHTML = `
+    <div class="control-group">
+      <label for="cancer-year">Year</label>
+      <select id="cancer-year" class="control"></select>
+    </div>
+    <div class="legend-panel">
+      <h3>Legend</h3>
+      <div class="legend-container"></div>
+    </div>
+  `;
+  mapCard.append(controls);
+
+  const statsCard = document.createElement('section');
+  statsCard.className = 'card cancer-stats-card';
+  statsCard.innerHTML = `
+    <div class="stats-section">
+      <h3>Top 5 incidence</h3>
+      <ol class="list top-list"></ol>
+    </div>
+    <div class="stats-section">
+      <h3>Bottom 5 incidence</h3>
+      <ol class="list bottom-list"></ol>
+    </div>
+  `;
+  layout.append(statsCard);
 
   const choropleth = createChoropleth({
     container: mapContainer,
     topology: data.topology
   });
 
-  panel.innerHTML = `
-    <div class="panel-section">
-      <label for="cancer-year">Year</label>
-      <select id="cancer-year" class="control"></select>
-    </div>
-    <div class="panel-section">
-      <h3>Legend</h3>
-      <div class="legend-container"></div>
-    </div>
-    <div class="panel-section">
-      <h3>Top 5 incidence</h3>
-      <ol class="list top-list"></ol>
-    </div>
-    <div class="panel-section">
-      <h3>Bottom 5 incidence</h3>
-      <ol class="list bottom-list"></ol>
-    </div>
-  `;
-
-  const yearSelect = panel.querySelector<HTMLSelectElement>('#cancer-year')!;
+  const yearSelect = controls.querySelector<HTMLSelectElement>('#cancer-year')!;
   YEARS.forEach((year) => {
     const option = document.createElement('option');
     option.value = year;
@@ -53,10 +64,10 @@ export function renderCancerView(root: HTMLElement, data: AppData) {
   });
   yearSelect.value = '2022';
 
-  const legend = createLegend({ container: panel.querySelector('.legend-container') as HTMLElement });
+  const legend = createLegend({ container: controls.querySelector('.legend-container') as HTMLElement });
 
-  const topList = panel.querySelector<HTMLOListElement>('.top-list')!;
-  const bottomList = panel.querySelector<HTMLOListElement>('.bottom-list')!;
+  const topList = statsCard.querySelector<HTMLOListElement>('.top-list')!;
+  const bottomList = statsCard.querySelector<HTMLOListElement>('.bottom-list')!;
 
   const byState = new Map(data.cancer.map((row) => [row.state, row]));
 

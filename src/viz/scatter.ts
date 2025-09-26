@@ -89,7 +89,7 @@ export function renderScatter(config: ScatterConfig, data: ScatterPoint[], label
     .attr('cx', (d: ScatterPoint) => xScale(d.x))
     .attr('cy', (d: ScatterPoint) => yScale(d.y))
     .attr('r', 4)
-    .attr('fill', '#1976d2')
+    .attr('fill', '#ffb566')
     .attr('opacity', 0.8)
     .append('title')
     .text((d: ScatterPoint) => `${d.state}\n${labels.xLabel}: ${d.x.toFixed(2)}\n${labels.yLabel}: ${d.y.toFixed(2)}`);
@@ -112,7 +112,7 @@ export function renderScatter(config: ScatterConfig, data: ScatterPoint[], label
     .attr('y1', yScale(linePoints[0].y))
     .attr('x2', xScale(linePoints[1].x))
     .attr('y2', yScale(linePoints[1].y))
-    .attr('stroke', '#d32f2f')
+    .attr('stroke', '#25b86f')
     .attr('stroke-width', 2)
     .attr('opacity', 0.8);
 

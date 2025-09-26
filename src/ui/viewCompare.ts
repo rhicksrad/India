@@ -75,7 +75,7 @@ export function renderCompareView(root: HTMLElement, data: AppData) {
 
   let residualMap = new Map<string, number | null>();
   let residualInfo = new Map<string, { actual: number; predicted: number; residual: number; cuisine: number }>();
-  let colorScale: (value: number) => string = () => '#ccc';
+  let colorScale: (value: number) => string = () => '#163346';
   let currentState: string | null = null;
 
   const choropleth = createChoropleth({
@@ -207,14 +207,14 @@ export function renderCompareView(root: HTMLElement, data: AppData) {
       negativeList.innerHTML = '';
       choropleth.update({
         data: new Map(),
-        colorScale: () => '#ccc',
+        colorScale: () => '#163346',
         highlighted: null,
         tooltipFormatter: () => ''
       });
       legend.update({
         title: 'Residuals',
         domain: [-1, 1],
-        scale: () => '#ccc',
+        scale: () => '#163346',
         format: (v) => v.toFixed(0)
       });
       statCorrelation.textContent = '—';
@@ -247,7 +247,8 @@ export function renderCompareView(root: HTMLElement, data: AppData) {
     const maxAbs = d3.max(scatterMetrics.residuals, (d) => Math.abs(d.residual)) ?? 0;
     const domainValue = maxAbs > 0 ? maxAbs : cancerMetric.isRate ? 0.05 : 1000;
     const scaleDomain: [number, number] = [-domainValue, domainValue];
-    const diverging = d3.scaleDiverging((t) => d3.interpolateRdBu(1 - t)).domain([-domainValue, 0, domainValue]);
+    const divergingPalette = d3.interpolateRgbBasis(['#ff9933', '#0b2135', '#138808']);
+    const diverging = d3.scaleDiverging((t) => divergingPalette(t)).domain([-domainValue, 0, domainValue]);
     colorScale = (value: number) => diverging(value);
 
     choropleth.update({

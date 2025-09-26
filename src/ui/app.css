@@ -1,43 +1,66 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   font-family: 'Inter', 'Segoe UI', sans-serif;
+  --color-navy-950: #030a13;
+  --color-navy-900: #06131f;
+  --color-navy-800: #0b2135;
+  --color-navy-700: #13344a;
+  --color-navy-600: #1a4661;
+  --color-saffron: #ff9933;
+  --color-saffron-soft: #ffb566;
+  --color-green: #138808;
+  --color-green-soft: #25b86f;
+  --color-cream: #f5f0e6;
+  --color-text-primary: #f5f7fa;
+  --color-text-secondary: #d1dbe7;
+  --color-border: rgba(245, 247, 250, 0.1);
+  --color-border-strong: rgba(245, 247, 250, 0.2);
+  --shadow-elevated: 0 18px 48px rgba(4, 16, 28, 0.4);
 }
 
 body {
   margin: 0;
-  background: #f7f7fa;
-  color: #1a1a1a;
+  background: radial-gradient(circle at top left, rgba(19, 52, 74, 0.35), transparent 55%), var(--color-navy-900);
+  color: var(--color-text-primary);
 }
 
 nav {
   display: flex;
   gap: 0.5rem;
   padding: 1rem 1.5rem;
-  background: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  background: linear-gradient(90deg, rgba(6, 19, 31, 0.9), rgba(13, 36, 57, 0.9));
+  border-bottom: 1px solid rgba(245, 247, 250, 0.08);
   position: sticky;
   top: 0;
   z-index: 10;
+  backdrop-filter: blur(8px);
 }
 
 .nav-item {
-  padding: 0.5rem 1rem;
-  border: 1px solid transparent;
+  padding: 0.55rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
-  background: #f0f0f5;
-  color: #333;
+  background: rgba(11, 33, 53, 0.6);
+  color: var(--color-text-secondary);
   cursor: pointer;
   font-size: 0.95rem;
-  transition: background 0.2s ease, color 0.2s ease;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-item:hover {
-  background: #e2e2ee;
+  background: rgba(255, 153, 51, 0.18);
+  color: var(--color-text-primary);
+  border-color: rgba(255, 153, 51, 0.6);
+  transform: translateY(-1px);
 }
 
 .nav-item.active {
-  background: #3949ab;
-  color: #fff;
+  background: var(--color-saffron);
+  color: var(--color-navy-950);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(255, 153, 51, 0.25);
+  font-weight: 600;
 }
 
 #app {
@@ -52,10 +75,11 @@ nav {
 
 .map-column,
 .panel-column {
-  background: #fff;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-  padding: 1rem;
+  background: rgba(9, 28, 44, 0.82);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow-elevated);
+  padding: 1.2rem;
+  border: 1px solid rgba(245, 247, 250, 0.06);
 }
 
 .map-column {
@@ -69,34 +93,49 @@ nav {
 }
 
 .panel-section + .panel-section {
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
+  border-top: 1px solid rgba(245, 247, 250, 0.04);
+  padding-top: 1.5rem;
 }
 
 .panel-section h3 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.65rem;
   font-size: 1.05rem;
+  color: var(--color-cream);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .panel-section h4,
 .panel-section h5 {
-  margin: 0.75rem 0 0.25rem;
+  margin: 0.75rem 0 0.35rem;
   font-size: 0.95rem;
+  color: var(--color-text-primary);
 }
 
 .control {
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #d0d0dd;
-  background: #fafaff;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(245, 247, 250, 0.18);
+  background: rgba(11, 33, 53, 0.9);
+  color: var(--color-text-primary);
   font-size: 0.95rem;
-  margin-top: 0.25rem;
+  margin-top: 0.45rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.control:focus {
+  outline: none;
+  border-color: rgba(255, 153, 51, 0.75);
+  box-shadow: 0 0 0 2px rgba(255, 153, 51, 0.25);
 }
 
 .metric-description {
-  margin: 0.5rem 0 0;
-  color: #4f4f67;
+  margin: 0.65rem 0 0;
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .list {
@@ -109,9 +148,10 @@ nav {
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid #ececf5;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(245, 247, 250, 0.08);
   font-size: 0.92rem;
+  color: var(--color-text-secondary);
 }
 
 .list li:last-child {
@@ -128,9 +168,10 @@ nav {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.3rem 0;
-  border-bottom: 1px solid #ececf5;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(245, 247, 250, 0.08);
   font-size: 0.88rem;
+  color: var(--color-text-secondary);
 }
 
 .metric-list li:last-child {
@@ -143,12 +184,12 @@ nav {
 
 .status {
   font-size: 1rem;
-  color: #555;
+  color: var(--color-text-secondary);
   text-align: center;
 }
 
 .status.error {
-  color: #c62828;
+  color: #ff6f61;
 }
 
 .choropleth-container {
@@ -163,30 +204,33 @@ nav {
 
 .choropleth-state {
   cursor: pointer;
-  transition: fill 0.2s ease;
+  transition: fill 0.2s ease, stroke 0.2s ease;
 }
 
 .choropleth-state.is-hovered,
 .choropleth-state.is-selected {
-  stroke: #1a237e;
-  stroke-width: 1.2;
+  stroke: var(--color-saffron);
+  stroke-width: 1.4;
 }
 
 .choropleth-tooltip {
   position: absolute;
   pointer-events: none;
-  background: rgba(33, 33, 33, 0.9);
-  color: #fff;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
+  background: rgba(6, 19, 31, 0.92);
+  color: var(--color-text-primary);
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.6rem;
   font-size: 0.85rem;
-  max-width: 220px;
-  line-height: 1.3;
+  max-width: 240px;
+  line-height: 1.4;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 32px rgba(3, 10, 19, 0.7);
 }
 
 .tooltip-title {
   font-weight: 600;
   margin-bottom: 0.25rem;
+  color: var(--color-cream);
 }
 
 .legend-svg,
@@ -195,21 +239,46 @@ nav {
   height: auto;
 }
 
+.legend-title {
+  fill: var(--color-text-primary);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.legend-bar {
+  stroke: rgba(245, 247, 250, 0.2);
+  rx: 4px;
+}
+
+.legend-axis .tick text,
+.scatter-svg .tick text {
+  fill: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.legend-axis .tick line,
+.legend-axis path,
+.scatter-svg .tick line,
+.scatter-svg path.domain {
+  stroke: rgba(245, 247, 250, 0.18);
+}
+
 .axis-label {
   font-size: 0.85rem;
-  fill: #555;
+  fill: var(--color-text-primary);
 }
 
 .empty-state {
   font-style: italic;
-  color: #757575;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 .stats {
   display: grid;
   gap: 0.35rem;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
 }
 
 .residual-lists {
@@ -219,8 +288,17 @@ nav {
 }
 
 .residual-detail {
-  font-size: 0.9rem;
-  color: #42425a;
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.scatter-points circle {
+  stroke: rgba(245, 247, 250, 0.1);
+}
+
+.regression-line {
+  filter: drop-shadow(0 0 6px rgba(19, 136, 8, 0.45));
 }
 
 @media (max-width: 960px) {

@@ -50,7 +50,7 @@ export function createLegend(config: LegendConfig) {
     .attr('width', width - 40)
     .attr('height', 20)
     .attr('fill', `url(#${gradientId})`)
-    .attr('stroke', '#999');
+    .attr('stroke', 'rgba(245, 247, 250, 0.2)');
 
   const axisGroup = barGroup
     .append('g')

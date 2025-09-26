@@ -1,9 +1,6 @@
 import type { CancerStateMetrics, CuisineStateMetrics, JoinedStateMetrics, DerivedData, IndiaTopology } from './types';
 
-const baseUrl = (() => {
-  const base = import.meta.env.BASE_URL ?? '/';
-  return base.startsWith('http') ? base : `${window.location.origin}${base}`;
-})();
+const baseUrl = new URL(import.meta.env.BASE_URL ?? '/', window.location.href);
 
 const resolvePublicPath = (relative: string) => new URL(relative, baseUrl).toString();
 
